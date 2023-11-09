@@ -2,6 +2,9 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
+.add-client{
+    margin-bottom: 20px;
+}
 th, td {
     text-align: left;
     padding: 8px;

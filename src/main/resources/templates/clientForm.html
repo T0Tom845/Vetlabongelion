@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать пользователя</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
+
+</head>
+<body>
+<form th:action="@{/clientForm}"  method="post">
+    <label>Имя:</label>
+    <input type="text" name="name" required><br>
+
+    <label>Компания:</label>
+    <input type="text" name="company" required><br>
+
+    <button class="btn" type="submit">Сохранить</button>
+</form>
+
+</body>
+</html>

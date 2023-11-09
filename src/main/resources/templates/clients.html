@@ -3,28 +3,31 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Список клиентов</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
 </head>
 <body>
 <h1>Список клиентов</h1>
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Имя</th>
-        <th>Компания</th>
-    </tr>
-    <th:block th:each="client : ${clients}">
+<div class="add-client"><a class="btn" th:href="@{/clientForm}">Добавить пользователя</a></div>
+<div>
+    <table>
         <tr>
-            <td th:text="${client.id}"></td>
-            <td th:text="${client.name}"></td>
-            <td th:text="${client.company}"></td>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Компания</th>
+            <th>Действие</th>
         </tr>
-    </th:block>
-</table>
-</body>
-</html>
-
-<body>
-
+        <th:block th:each="client : ${clients}">
+            <tr>
+                <td th:text="${client.id}"></td>
+                <td th:text="${client.name}"></td>
+                <td th:text="${client.company}"></td>
+                <td>
+                    <button class="btn">Изменить</button>
+                    <button class="btn">Удалить</button>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</div>
 </body>
 </html>

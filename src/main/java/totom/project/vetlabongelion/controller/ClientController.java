@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import totom.project.vetlabongelion.model.Client;
-import totom.project.vetlabongelion.repository.ClientRepository;
+import totom.project.vetlabongelion.service.ClientService;
 
 import java.util.List;
 
@@ -13,12 +15,21 @@ import java.util.List;
 public class ClientController {
 
     @Autowired
-    private ClientRepository clientRepository;
+    private ClientService clientService;
 
     @GetMapping("/clients")
     public String showClients(Model model) {
-        List<Client> clients = clientRepository.findAll();
+        List<Client> clients = clientService.findAll();
         model.addAttribute("clients", clients);
         return "clients";
+    }
+    @GetMapping("/clientForm")
+    public String showClientForm(){
+        return "clientForm";
+    }
+    @PostMapping("/clientForm")
+    public String saveClient(@ModelAttribute("client")Client client){
+        clientService.save(client);
+        return "redirect:/clients";
     }
 }
