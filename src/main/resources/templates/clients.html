@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+        lang="ru">
 <head>
     <title>Список клиентов</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
@@ -22,7 +23,7 @@
                 <td th:text="${client.name}"></td>
                 <td th:text="${client.company}"></td>
                 <td>
-                    <button class="btn">Изменить</button>
+                    <a th:href="@{/editClient/{id}(id = ${client.id})}" class="btn">Изменить</a>
                     <form class="delete-button" th:action="@{/deleteClient/{id}(id=${client.id})}">
                         <button type="submit" class="btn">Удалить</button>
                     </form>
