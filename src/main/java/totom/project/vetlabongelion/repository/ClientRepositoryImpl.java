@@ -47,7 +47,12 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public Client update(Client client) {
-        return null;
+        String sql = "UPDATE vet_client SET name = ?, company = ? WHERE id = ?";
+        jdbcTemplate.update(sql,
+                client.getName(),
+                client.getCompany(),
+                client.getId());
+        return client;
     }
 
     @Override

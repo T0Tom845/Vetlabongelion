@@ -22,7 +22,7 @@
                 <td th:text="${client.name}"></td>
                 <td th:text="${client.company}"></td>
                 <td>
-                    <button class="btn">Изменить</button>
+                    <a th:href="@{/editClient/{id}(id = ${client.id})}" class="btn">Изменить</a>
                     <form class="delete-button" th:action="@{/deleteClient/{id}(id=${client.id})}">
                         <button type="submit" class="btn">Удалить</button>
                     </form>

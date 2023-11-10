@@ -32,4 +32,19 @@ public class ClientController {
         clientService.deleteById(id);
         return "redirect:/clients";
     }
+    @GetMapping("/editClient/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model){
+        Client client = clientService.findById(id);
+        if (!client.equals(null)){
+            model.addAttribute("client", client);
+            return "editClient";
+        }
+        return "redirect:/clients";
+    }
+    @PostMapping("/editClient")
+    public String editClient(@ModelAttribute Client client){
+        clientService.update(client);
+        return "redirect:/clients";
+    }
+
 }
