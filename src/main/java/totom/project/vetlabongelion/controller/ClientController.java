@@ -23,11 +23,7 @@ public class ClientController {
         model.addAttribute("clients", clients);
         return "clients";
     }
-    @GetMapping("/clientForm")
-    public String showClientForm(){
-        return "clientForm";
-    }
-    @PostMapping("/clientForm")
+    @PostMapping("/addClient")
     public String saveClient(@ModelAttribute("client")Client client){
         clientService.save(client);
         return "redirect:/clients";

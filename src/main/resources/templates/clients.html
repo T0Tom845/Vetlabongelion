@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Список клиентов</h1>
-<div class="add-client"><a class="btn" th:href="@{/clientForm}">Добавить пользователя</a></div>
+<div class="add-client"><a class="btn" onclick="openForm()">Добавить пользователя</a></div>
 <div>
     <table>
         <tr>
@@ -29,5 +29,29 @@
         </th:block>
     </table>
 </div>
+<div class="form-popup-wrapper" id="add-client-form">
+    <h1> Добавление клиента </h1>
+    <div class="form-popup" >
+        <form th:action="@{/addClient}" method="post">
+            <label>Имя:</label>
+            <input type="text" name="name" required><br>
+
+            <label>Компания:</label>
+            <input type="text" name="company" required><br>
+
+            <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+        </form>
+    </div>
+</div>
+
 </body>
+<script type="text/javascript">
+    function openForm() {
+        document.getElementById("add-client-form").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("add-client-form").style.display = "none";
+    }
+</script>
 </html>

@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+    position: relative;
+}
 table {
     border-collapse: collapse;
     width: 100%;
@@ -25,4 +29,41 @@ th {
 }
 .btn:hover {
     background-color: #45a049;
+}
+
+/*Стили формы*/
+
+.form-popup {
+    padding: 100px;
+
+}
+.form-popup label{
+    color: #eeeeee;
+}
+form{
+    width: 100%;
+}
+.form-popup input{
+    width:100%;
+    padding:10px;
+    margin: 10px;
+    border:0;
+    border-bottom:1px solid #eee;
+    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+}
+.form-popup-wrapper h1{
+    color: #eeeeee;
+    font-size: 24px;
+    text-align: center;
+
+}
+.form-popup-wrapper{
+    display: none;
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+    background-color: grey;
 }
