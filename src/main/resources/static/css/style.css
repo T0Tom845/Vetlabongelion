@@ -2,6 +2,7 @@
     box-sizing: border-box;
     position: relative;
 }
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -26,6 +27,8 @@ th {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    text-decoration: none;
+    font-size: 18px;
 }
 .btn:hover {
     background-color: #45a049;

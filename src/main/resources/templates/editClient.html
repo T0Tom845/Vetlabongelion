@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Client</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
+
 </head>
 <body>
-<h1 >Edit task</h1>
-<form action="/editClient" method="post">
+<form class="form-popup" action="/editClient" method="post">
+    <h1>Изменить клиента</h1>
     <input type="hidden" name="id" th:value="${client.id}">
     <div>
         <label for="name">Имя:</label>
@@ -14,9 +16,9 @@
     </div>
     <div>
         <label for="company">Description:</label>
-        <textarea id="company" name="company" required th:text="${client.company}"></textarea>
+        <input type="text" id="company" name="company" required th:value="${client.company}"></input>
     </div>
-    <button type="submit">Save</button>
+    <button type="submit" class="btn">Сохранить</button>
 </form>
 </body>
 </html>
