@@ -23,15 +23,17 @@
                 <td th:text="${client.company}"></td>
                 <td>
                     <button class="btn">Изменить</button>
-                    <button class="btn">Удалить</button>
+                    <form class="delete-button" th:action="@{/deleteClient/{id}(id=${client.id})}">
+                        <button type="submit" class="btn">Удалить</button>
+                    </form>
                 </td>
             </tr>
         </th:block>
     </table>
 </div>
 <div class="form-popup-wrapper" id="add-client-form">
-    <h1> Добавление клиента </h1>
     <div class="form-popup" >
+        <h1> Добавление клиента </h1>
         <form th:action="@{/addClient}" method="post">
             <label>Имя:</label>
             <input type="text" name="name" required><br>

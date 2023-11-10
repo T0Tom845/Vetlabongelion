@@ -52,6 +52,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
     @Override
     public void deleteById(Long id) {
-
+        System.out.println("Delete " + id);
+        jdbcTemplate.update("DELETE FROM vet_client WHERE id = ?", id);
     }
 }

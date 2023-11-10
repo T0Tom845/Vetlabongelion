@@ -34,11 +34,14 @@ th {
 /*Стили формы*/
 
 .form-popup {
-    padding: 100px;
-
+    padding: 25px;
+    background-color: #eeeeee;
+    width: 50%;
+    left: 25%;
+    top: 25%;
 }
 .form-popup label{
-    color: #eeeeee;
+    color: #262525;
 }
 form{
     width: 100%;
@@ -51,19 +54,24 @@ form{
     border-bottom:1px solid #eee;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
 }
-.form-popup-wrapper h1{
-    color: #eeeeee;
+.form-popup h1{
+    color: #262525;
     font-size: 24px;
     text-align: center;
 
 }
 .form-popup-wrapper{
     display: none;
-    position: fixed;
-    top: 15%;
+    position: absolute;
+    top: -50%;
     left: 50%;
     transform: translate(-50%, 50%);
     border: 3px solid #f1f1f1;
     z-index: 9;
-    background-color: grey;
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    height: 100%;
+}
+.delete-button{
+    display: inline;
 }

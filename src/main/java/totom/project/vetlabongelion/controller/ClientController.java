@@ -3,9 +3,7 @@ package totom.project.vetlabongelion.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import totom.project.vetlabongelion.model.Client;
 import totom.project.vetlabongelion.service.ClientService;
 
@@ -26,6 +24,12 @@ public class ClientController {
     @PostMapping("/addClient")
     public String saveClient(@ModelAttribute("client")Client client){
         clientService.save(client);
+        return "redirect:/clients";
+    }
+    @GetMapping("/deleteClient/{id}")
+    public String deleteClient(@PathVariable("id") Long id){
+        System.out.println("Controller: Delete " + id);
+        clientService.deleteById(id);
         return "redirect:/clients";
     }
 }
