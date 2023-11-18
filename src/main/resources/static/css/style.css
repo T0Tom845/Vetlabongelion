@@ -2,7 +2,12 @@
     box-sizing: border-box;
     position: relative;
 }
-
+header, nav{
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
 table {
     border-collapse: collapse;
     width: 100%;
