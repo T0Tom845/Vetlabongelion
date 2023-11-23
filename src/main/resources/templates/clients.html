@@ -24,8 +24,8 @@
                 <td th:text="${client.name}"></td>
                 <td th:text="${client.company}"></td>
                 <td>
-                    <a th:href="@{/editClient/{id}(id = ${client.id})}" class="btn">Изменить</a>
-                    <form class="delete-button" th:action="@{/deleteClient/{id}(id=${client.id})}">
+                    <a th:href="@{/clients/editClient/{id}(id = ${client.id})}" class="btn">Изменить</a>
+                    <form class="delete-button" th:action="@{/clients/deleteClient/{id}(id=${client.id})}">
                         <button type="submit" class="btn">Удалить</button>
                     </form>
                 </td>
@@ -33,20 +33,10 @@
         </th:block>
     </table>
 </div>
-<div class="form-popup-wrapper" id="add-client-form">
-<!--    TODO: добавить popup в фрагменты-->
-    <div class="form-popup" >
-        <h1> Добавление клиента </h1>
-        <form th:action="@{/addClient}" method="post">
-            <label>ФИО:</label>
-            <input type="text" name="name" required><br>
+<div class="form-popup-wrapper" id="add-client-form" >
+    <div th:insert="fragments/add-client-popup"></div>
+<!--    TODO: перенести popup в фрагменты-->
 
-            <label>Компания:</label>
-            <input type="text" name="company" required><br>
-
-            <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
-        </form>
-    </div>
 </div>
 
 </body>

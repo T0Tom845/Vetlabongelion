@@ -10,18 +10,19 @@ import totom.project.vetlabongelion.service.ClientService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/clients")
 public class ClientController {
 
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping
     public String showClients(Model model) {
         List<Client> clients = clientService.findAll();
         model.addAttribute("clients", clients);
         return "clients";
     }
-    @PostMapping("/addClient")
+    @PostMapping
     public String saveClient(@ModelAttribute("client")Client client){
         clientService.save(client);
         return "redirect:/clients";
