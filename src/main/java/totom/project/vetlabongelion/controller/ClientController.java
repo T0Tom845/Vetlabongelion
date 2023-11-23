@@ -33,18 +33,16 @@ public class ClientController {
         clientService.deleteById(id);
         return "redirect:/clients";
     }
-    @GetMapping("/editClient/{id}")
-    public String showUpdateForm(@PathVariable Long id, Model model){
-        Client client = clientService.findById(id);
-        if (!client.equals(null)){
-            model.addAttribute("client", client);
-            return "editClient";
-        }
+    @GetMapping("editClient/{id}")
+    public String handleEditing(@PathVariable String id){
+        System.out.println("Get Edit " + id);
         return "redirect:/clients";
     }
-    @PostMapping("/editClient")
-    public String editClient(@ModelAttribute Client client){
+    @PostMapping("editClient/{id}")
+    public String editClient(@ModelAttribute("client") Client client){
+
         clientService.update(client);
+        System.out.println("Post Edit " + client.getId());
         return "redirect:/clients";
     }
 

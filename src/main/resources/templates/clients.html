@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-        lang="ru">
+      lang="ru">
 <head>
     <title>Список клиентов</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
 </head>
 <body>
-<div th:insert="fragments/general/header :: header">    </div>
+<div th:insert="~{fragments/general/header :: header}"></div>
 <h1>Список клиентов</h1>
-<div class="add-client"><a class="btn" onclick="openForm()">Добавить пользователя</a></div>
+<div class="add-client"><a class="btn" onclick="openAddClientForm()">Добавить пользователя</a></div>
 <div>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>ФИО</th>
-            <th>Компания</th>
-            <th>Действие</th>
-        </tr>
-        <th:block th:each="client : ${clients}">
-            <tr>
-                <td th:text="${client.id}"></td>
-                <td th:text="${client.name}"></td>
-                <td th:text="${client.company}"></td>
-                <td>
-                    <a th:href="@{/clients/editClient/{id}(id = ${client.id})}" class="btn">Изменить</a>
-                    <form class="delete-button" th:action="@{/clients/deleteClient/{id}(id=${client.id})}">
-                        <button type="submit" class="btn">Удалить</button>
-                    </form>
-                </td>
-            </tr>
-        </th:block>
-    </table>
+    <h2>ID</h2>
+    <h2>ФИО</h2>
+    <h2>Компания</h2>
+    <h2>Действие</h2>
+
+    <th:block th:each="client : ${clients}">
+        <div th:text="${client.id}"></div>
+        <div>
+            <form class="edit-button" th:action="@{/clients/editClient/{id}(id=${client.id})}" method="post">
+                <input type="text" name="name" required class="client-data" th:value="${client.name}">
+                <input type="text" name="company" required class="client-data" th:value="${client.company}">
+                <button type="submit" class="btn">Изменить</button>
+            </form>
+            <br>
+
+            <form class="delete-button" th:action="@{/clients/deleteClient/{id}(id=${client.id})}">
+                <button type="submit" class="btn">Удалить</button>
+            </form>
+        </div>
+    </th:block>
 </div>
-<div class="form-popup-wrapper" id="add-client-form" >
-    <div th:insert="fragments/clients/add-client-popup"></div>
-</div>
+
+<div id="add-client-form" class="form-popup-wrapper"
+     th:insert="~{fragments/clients/add-client-popup}"></div>
 
 </body>
 <script type="text/javascript">
-    function openForm() {
+    function openAddClientForm() {
         document.getElementById("add-client-form").style.display = "block";
-    }
-
-    function closeForm() {
-        document.getElementById("add-client-form").style.display = "none";
     }
 </script>
 </html>
