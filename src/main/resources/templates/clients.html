@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
 </head>
 <body>
-<div th:insert="fragments/header :: header">    </div>
+<div th:insert="fragments/general/header :: header">    </div>
 <h1>Список клиентов</h1>
 <div class="add-client"><a class="btn" onclick="openForm()">Добавить пользователя</a></div>
 <div>
@@ -34,9 +34,7 @@
     </table>
 </div>
 <div class="form-popup-wrapper" id="add-client-form" >
-    <div th:insert="fragments/add-client-popup"></div>
-<!--    TODO: перенести popup в фрагменты-->
-
+    <div th:insert="fragments/clients/add-client-popup"></div>
 </div>
 
 </body>
