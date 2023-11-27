@@ -40,7 +40,6 @@ public class ClientController {
     }
     @PostMapping("editClient/{id}")
     public String editClient(@ModelAttribute("client") Client client){
-
         clientService.update(client);
         System.out.println("Post Edit " + client.getId());
         return "redirect:/clients";

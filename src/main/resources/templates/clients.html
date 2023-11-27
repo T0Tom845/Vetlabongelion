@@ -10,27 +10,27 @@
 <div th:insert="~{fragments/general/header :: header}"></div>
 <h1>Список клиентов</h1>
 <div class="add-client"><a class="btn" onclick="openAddClientForm()">Добавить пользователя</a></div>
-<div>
+<div class="table-header">
     <h2>ID</h2>
     <h2>ФИО</h2>
     <h2>Компания</h2>
     <h2>Действие</h2>
-
-    <th:block th:each="client : ${clients}">
-        <div th:text="${client.id}"></div>
-        <div>
-            <form class="edit-button" th:action="@{/clients/editClient/{id}(id=${client.id})}" method="post">
-                <input type="text" name="name" required class="client-data" th:value="${client.name}">
-                <input type="text" name="company" required class="client-data" th:value="${client.company}">
-                <button type="submit" class="btn">Изменить</button>
-            </form>
-            <br>
-
-            <form class="delete-button" th:action="@{/clients/deleteClient/{id}(id=${client.id})}">
-                <button type="submit" class="btn">Удалить</button>
-            </form>
+</div>
+<th:block th:each="client : ${clients}">
+    <form class="table-row" th:id="'client-form-' + ${client.id}" th:action="@{/clients/editClient/{id}(id=${client.id})}" method="post">
+        <div class="client-id" th:text="${client.id}"></div>
+        <input type="text" readonly="true" required name="name"  class="client-data" th:value="${client.name}">
+        <input type="text" readonly="true" required name="company" class="client-data" th:value="${client.company}">
+        <div class="actions">
+            <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
+            <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
+            <button formmethod="get" th:formaction="@{/clients/deleteClient/{id}(id=${client.id})}" type="submit"
+                    class="btn">Удалить
+            </button>
         </div>
-    </th:block>
+    </form>
+
+</th:block>
 </div>
 
 <div id="add-client-form" class="form-popup-wrapper"
@@ -41,5 +41,20 @@
     function openAddClientForm() {
         document.getElementById("add-client-form").style.display = "block";
     }
+    function enableEditForm(event){
+        let form = event.target.closest('form');
+        let dataArr = form.getElementsByClassName('client-data');
+        for (let data of dataArr) {
+            data.removeAttribute('readonly');
+        }
+
+        let submitButton = form.querySelector('.submit-button');
+        submitButton.removeAttribute('disabled');
+
+        let changeButton = form.querySelector('.change-button');
+        changeButton.setAttribute('disabled', 'true');
+
+    }
+
 </script>
 </html>
