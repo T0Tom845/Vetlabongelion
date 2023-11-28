@@ -9,7 +9,9 @@ import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import totom.project.vetlabongelion.model.Client;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,17 +25,25 @@ public class ClientRepositoryImpl implements ClientRepository {
     @Override
     public List<Client> findAll() {
         String sql = "SELECT * FROM vet_client";
-        return jdbcTemplate.query(sql, new ClientRowMapper());
+        return jdbcTemplate.query(sql, ROW_MAPPER);
+    }
+    @Override
+    public List<Client> findAll(String query) {
+        String sql = "SELECT * from vet_client where name SIMILAR TO '%' || ? || '%' " +
+                "OR company SIMILAR TO '%' || ? || '%'";
+        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query));
     }
 
     @Override
     public Optional<Client> findById(Long id) {
         String sql = "SELECT * FROM vet_client WHERE id = ?";
         List<Client> result =jdbcTemplate.query(
-                sql, new ClientRowMapper(), id);
+                sql, ROW_MAPPER, id);
 
         return result.size() == 0? Optional.empty() : Optional.of(result.get(0));
     }
+
+
 
     @Override
     public Client save(Client client) {

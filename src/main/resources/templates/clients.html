@@ -8,6 +8,13 @@
 </head>
 <body>
 <div th:insert="~{fragments/general/header :: header}"></div>
+<div class="search-bar">
+    <form method="get">
+        <label for="searchQuery" th:text="Поиск"></label>
+        <input type="text" name="searchQuery" id="searchQuery">
+        <button type="submit" class="btn">Поиск</button>
+    </form>
+</div>
 <h1>Список клиентов</h1>
 <div class="add-client"><a class="btn" onclick="openAddClientForm()">Добавить пользователя</a></div>
 <div class="table-header">
@@ -31,7 +38,6 @@
     </form>
 
 </th:block>
-</div>
 
 <div id="add-client-form" class="form-popup-wrapper"
      th:insert="~{fragments/clients/add-client-popup}"></div>

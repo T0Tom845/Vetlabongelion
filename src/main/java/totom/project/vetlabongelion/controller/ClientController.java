@@ -17,8 +17,14 @@ public class ClientController {
     private ClientService clientService;
 
     @GetMapping
-    public String showClients(Model model) {
-        List<Client> clients = clientService.findAll();
+    public String showClients(@RequestParam(value="searchQuery", required = false) String searchQuery, Model model) {
+        List<Client> clients;
+        if (searchQuery == null){
+            clients = clientService.findAll();
+        }
+        else {
+            clients = clientService.findAll(searchQuery);
+        }
         model.addAttribute("clients", clients);
         return "clients";
     }
@@ -44,5 +50,7 @@ public class ClientController {
         System.out.println("Post Edit " + client.getId());
         return "redirect:/clients";
     }
+
+
 
 }

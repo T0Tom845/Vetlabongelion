@@ -28,4 +28,7 @@ public class ClientService {
     public void deleteById(Long id){
         clientRepository.deleteById(id);
     }
+    public List<Client> findAll(String query){
+        return clientRepository.findAll(query);
+    }
 }
