@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="ru">
 <head>
-    <title>Клиенты</title>
+    <title>Работники</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
 </head>
 <body>
@@ -15,23 +15,24 @@
         <button type="submit" class="btn">Поиск</button>
     </form>
 </div>
-<h1>Список клиентов</h1>
-<div class="add-client"><a class="btn" onclick="openAddClientForm()">Добавить пользователя</a></div>
+<h1>Список работников</h1>
+<div class="add-employee"><a class="btn" onclick="openAddEmployeeForm()">Добавить пользователя</a></div>
 <div class="table-header">
     <h2>ID</h2>
     <h2>ФИО</h2>
-    <h2>Компания</h2>
-    <h2>Действие</h2>
+    <h2>Должность</h2>
+    <h2>Отдел</h2>
 </div>
-<th:block th:each="client : ${clients}">
-    <form class="table-row" th:id="'client-form-' + ${client.id}" th:action="@{/clients/editClient/{id}(id=${client.id})}" method="post">
-        <div class="id" th:text="${client.id}"></div>
-        <input type="text" readonly="true" required name="name"  class="input-field" th:value="${client.name}">
-        <input type="text" readonly="true" required name="company" class="input-field" th:value="${client.company}">
+<th:block th:each="employee : ${employees}">
+    <form class="table-row" th:id="'employee-form-' + ${employee.id}" th:action="@{/employee/editEmployee/{id}(id=${employee.id})}" method="post">
+        <div class="id" th:text="${employee.id}"></div>
+        <input type="text" readonly="true" required name="name"  class="input-field" th:value="${employee.name}">
+        <input type="text" readonly="true" required name="job-title" class="input-field" th:value="${employee.jobTitle}">
+        <input type="text" readonly="true" required name="department" class="input-field" th:value="${employee.depId}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
-            <button formmethod="get" th:formaction="@{/clients/deleteClient/{id}(id=${client.id})}" type="submit"
+            <button formmethod="get" th:formaction="@{/employees/deleteEmployee/{id}(id=${employee.id})}" type="submit"
                     class="btn">Удалить
             </button>
         </div>
@@ -39,13 +40,13 @@
 
 </th:block>
 
-<div id="add-client-form" class="form-popup-wrapper"
-     th:insert="~{fragments/pop-ups/add-client-popup}"></div>
+<div id="add-employee-form" class="form-popup-wrapper"
+     th:insert="~{fragments/pop-ups/add-employee-popup}"></div>
 
 </body>
 <script type="text/javascript">
-    function openAddClientForm() {
-        document.getElementById("add-client-form").style.display = "block";
+    function openAddEmployeeForm() {
+        document.getElementById("add-employee-form").style.display = "block";
     }
     function enableEditForm(event){
         let form = event.target.closest('form');

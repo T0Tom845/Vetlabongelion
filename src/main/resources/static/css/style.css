@@ -80,7 +80,7 @@ form{
 .delete-button{
     display: inline;
 }
-.client-data{
+.input-field{
     font-size: 16px;
     padding: 15px;
     border-radius: 10px;
@@ -88,7 +88,7 @@ form{
     box-shadow: 0px 0px 20px 10px #acf8a3;
     margin: 5px 10px;
 }
-.client-data[readonly]{
+.input-field[readonly]{
     box-shadow: 0px 0px 20px 10px #9a9a9a;
 }
 .submit-button:disabled, .change-button:disabled{
@@ -120,7 +120,7 @@ form{
 .table-header h2{
     margin: 10px 20px;
 }
-.client-id{
+.id{
     text-align: center;
     font-size: 20px;
 }

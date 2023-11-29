@@ -1,0 +1,9 @@
+<div class="form-popup">
+  <h1> Добавление отдела </h1>
+  <form th:action="@{/departments}" method="post">
+    <label>Название:</label>
+    <input type="text" name="name" required><br>
+
+    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+  </form>
+</div>
