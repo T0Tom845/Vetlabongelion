@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import totom.project.vetlabongelion.model.Employee;
+import totom.project.vetlabongelion.service.DepartmentService;
 import totom.project.vetlabongelion.service.EmployeeService;
 
 import java.util.List;

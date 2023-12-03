@@ -24,7 +24,7 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     @Override
     public List<Department> findAll(String query) {
         String sql = "SELECT * from vet_department where dep_name SIMILAR TO '%' || ? || '%' ";
-        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query));
+        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query));
     }
 
     @Override

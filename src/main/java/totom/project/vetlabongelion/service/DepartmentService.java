@@ -1,5 +1,6 @@
 package totom.project.vetlabongelion.service;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import totom.project.vetlabongelion.model.Department;
@@ -8,6 +9,7 @@ import totom.project.vetlabongelion.repository.DepartmentRepository;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class DepartmentService {
     @Autowired
     DepartmentRepository departmentRepository;

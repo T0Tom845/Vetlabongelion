@@ -12,4 +12,8 @@ public class MainController {
     public String handleIndexView(){
         return "index";
     }
+    @GetMapping("/login")
+    public String handleLogin(){
+        return "login";
+    }
 }

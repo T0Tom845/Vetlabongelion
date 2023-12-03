@@ -24,9 +24,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
     @Override
     public List<Employee> findAll(String query) {
         String sql = "SELECT * from vet_employee where emp_name SIMILAR TO '%' || ? || '%' " +
-                "OR emp_job_title SIMILAR TO '%' || ? || '%' " +
-                "OR emp_dep_id SIMILAR TO '%' || ? || '%' ";
-        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query, query));
+                "OR emp_job_title SIMILAR TO '%' || ? || '%' " ;
+        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query));
     }
 
     @Override

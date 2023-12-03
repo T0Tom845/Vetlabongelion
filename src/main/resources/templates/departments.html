@@ -16,14 +16,14 @@
     </form>
 </div>
 <h1>Список отделов</h1>
-<div class="add-department"><a class="btn" onclick="openAddDepartmentForm()">Добавить отдел</a></div>
+<div class="add-entity"><a class="btn" onclick="openAddDepartmentForm()">Добавить отдел</a></div>
 <div class="table-header">
     <h2>ID</h2>
     <h2>Название</h2>
 </div>
 <th:block th:each="department : ${departments}">
     <form class="table-row" th:id="'department-form-' + ${department.id}" th:action="@{/departments/editDepartment/{id}(id=${department.id})}" method="post">
-        <div class="department-id" th:text="${department.id}"></div>
+        <div class="id" th:text="${department.id}"></div>
         <input type="text" readonly="true" required name="name"  class="input-field" th:value="${department.name}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
