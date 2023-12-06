@@ -1,0 +1,18 @@
+<div class="form-popup">
+  <h1> Добавление исследования</h1>
+  <form th:action="@{/researches}" method="post">
+    <label>ID типа исследования:</label>
+    <input type="text" name="typeId" required><br>
+
+    <label>Id Протокола:</label>
+    <input type="text" name="protId" required><br>
+
+    <label>Дата оформления:</label>
+    <input type="date" name="date" required><br>
+
+    <label>ID Заявки на исследование:</label>
+    <input type="text" name="requestId" required><br>
+
+    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+  </form>
+</div>

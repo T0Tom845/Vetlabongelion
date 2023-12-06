@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+<head>
+    <title>Заявки на исследование</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
+</head>
+<body>
+<div th:insert="~{fragments/general/header :: header}"></div>
+<div class="search-bar">
+    <form method="get">
+        <label for="searchQuery" th:text="Поиск"></label>
+        <input type="text" name="searchQuery" id="searchQuery">
+        <button type="submit" class="btn">Поиск</button>
+    </form>
+</div>
+<h1>Список заявок</h1>
+<div class="add-entity"><a class="btn" onclick="openAddForm()">Добавить заявку</a></div>
+<div class="table-header">
+    <h2>ID</h2>
+    <h2>ID Работника</h2>
+    <h2>ID Клиента</h2>
+    <h2>Дата</h2>
+    <h2>ID Образца</h2>
+</div>
+<th:block th:each="researchRequest : ${researchRequests}">
+    <form class="table-row" th:id="'research-request-form-' + ${researchRequest.id}" th:action="@{/research-requests/editResearchRequest/{id}(id=${researchRequest.id})}" method="post">
+        <div class="id" th:text="${researchRequest.id}"></div>
+        <input type="text" readonly="true" required name="employeeId"  class="input-field" th:value="${researchRequest.employeeId}">
+        <input type="text" readonly="true" required name="clientId" class="input-field" th:value="${researchRequest.clientId}">
+        <input type="date" readonly="true" required name="date" class="input-field" th:value="${researchRequest.date}">
+        <input type="text" readonly="true" required name="sampleId" class="input-field" th:value="${researchRequest.sampleId}">
+        <div class="actions">
+            <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
+            <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
+            <button formmethod="get" th:formaction="@{/research-requests/deleteResearchRequest/{id}(id=${researchRequest.id})}" type="submit"
+                    class="btn">Удалить
+            </button>
+        </div>
+    </form>
+
+</th:block>
+
+<div id="add-research-request-form" class="form-popup-wrapper"
+     th:insert="~{fragments/pop-ups/add-research-request-popup}"></div>
+
+</body>
+<script type="text/javascript">
+    function openAddForm() {
+        document.getElementById("add-research-request-form").style.display = "block";//TODO: Сделать единый id для попупа
+    }
+    function enableEditForm(event){
+        let form = event.target.closest('form');
+        let dataArr = form.getElementsByClassName('input-field');
+        for (let data of dataArr) {
+            data.removeAttribute('readonly');
+        }
+
+        let submitButton = form.querySelector('.submit-button');
+        submitButton.removeAttribute('disabled');
+
+        let changeButton = form.querySelector('.change-button');
+        changeButton.setAttribute('disabled', 'true');
+
+    }
+
+</script>
+</html>

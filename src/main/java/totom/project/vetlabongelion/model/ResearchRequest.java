@@ -8,17 +8,19 @@ import java.util.Date;
 
 @Data
 @FieldNameConstants
-public class Protocol {
+public class ResearchRequest {
     @Id
     private Long id;
-    private Long clientId;  //TODO: связать prot_cli_id с таблицей client
-    private Date date;
     private Long employeeId;
+    private Long clientId;//TODO: Связать с таблицей client
+    private Date date;
+    private Long sampleId;
 
-    public Protocol(Long id, Long clientId, Date date, Long employeeId){
+    public ResearchRequest(Long id, Long employeeId, Long clientId, Date date, Long sampleId) {
         this.id = id;
+        this.employeeId = employeeId;
         this.clientId = clientId;
         this.date = date;
-        this.employeeId = employeeId;
+        this.sampleId = sampleId;
     }
 }

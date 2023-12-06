@@ -1,0 +1,15 @@
+<div class="form-popup">
+  <h1> Добавление исследования</h1>
+  <form th:action="@{/samples}" method="post">
+    <label>Тип:</label>
+    <input type="text" name="type" required><br>
+
+    <label>Наименование:</label>
+    <input type="text" name="name" required><br>
+
+    <label>Количество:</label>
+    <input type="text" name="amount" required><br>
+
+    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+  </form>
+</div>

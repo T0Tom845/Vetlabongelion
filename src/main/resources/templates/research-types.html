@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       lang="ru">
 <head>
-    <title>Работники</title>
+    <title>Типы исследований</title>
     <link rel="stylesheet" type="text/css" th:href="@{/styles/css/style.css}"/>
 </head>
 <body>
@@ -15,24 +15,22 @@
         <button type="submit" class="btn">Поиск</button>
     </form>
 </div>
-<h1>Список работников</h1>
-<div class="add-entity"><a class="btn" onclick="openAddEmployeeForm()">Добавить пользователя</a></div>
+<h1>Список типов исследований</h1>
+<div class="add-entity"><a class="btn" onclick="openAddForm()">Добавить тип исследования</a></div>
 <div class="table-header">
     <h2>ID</h2>
-    <h2>ФИО</h2>
-    <h2>Должность</h2>
-    <h2>Отдел</h2>
+    <h2>Тип ислледования</h2>
+    <h2>ID отдела</h2>
 </div>
-<th:block th:each="employee : ${employees}">
-    <form class="table-row" th:id="'employee-form-' + ${employee.id}" th:action="@{/employees/editEmployee/{id}(id=${employee.id})}" method="post">
-        <div class="id" th:text="${employee.id}"></div>
-        <input type="text" readonly="true" required name="name"  class="input-field" th:value="${employee.name}">
-        <input type="text" readonly="true" required name="jobTitle" class="input-field" th:value="${employee.jobTitle}">
-        <input type="text" readonly="true" required name="depId" class="input-field" th:value="${employee.depId}">
+<th:block th:each="researchType : ${researchTypes}">
+    <form class="table-row" th:id="'research-type-form-' + ${researchType.id}" th:action="@{/research-types/editResearchType/{id}(id=${researchType.id})}" method="post">
+        <div class="id" th:text="${researchType.id}"></div>
+        <input type="text" readonly="true" required name="type"  class="input-field" th:value="${researchType.type}">
+        <input type="text" readonly="true" required name="departmentId" class="input-field" th:value="${researchType.departmentId}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
-            <button formmethod="get" th:formaction="@{/employees/deleteEmployee/{id}(id=${employee.id})}" type="submit"
+            <button formmethod="get" th:formaction="@{/research-types/deleteResearchType/{id}(id=${researchType.id})}" type="submit"
                     class="btn">Удалить
             </button>
         </div>
@@ -40,13 +38,13 @@
 
 </th:block>
 
-<div id="add-employee-form" class="form-popup-wrapper"
-     th:insert="~{fragments/pop-ups/add-employee-popup}"></div>
+<div id="add-research-type-form" class="form-popup-wrapper"
+     th:insert="~{fragments/pop-ups/add-research-type-popup}"></div>
 
 </body>
 <script type="text/javascript">
-    function openAddEmployeeForm() {
-        document.getElementById("add-employee-form").style.display = "block";
+    function openAddForm() {
+        document.getElementById("add-research-type-form").style.display = "block";
     }
     function enableEditForm(event){
         let form = event.target.closest('form');
