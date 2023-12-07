@@ -23,7 +23,7 @@
     <h2>Наименование</h2>
     <h2>Количество</h2>
 </div>
-<th:block th:each="sample : ${samples}">
+<th:block th:each="sample : ${samples}" >
     <form class="table-row" th:id="'sample-form-' + ${sample.id}" th:action="@{/samples/editSample/{id}(id=${sample.id})}" method="post">
         <div class="id" th:text="${sample.id}"></div>
         <input type="text" readonly="true" required name="type"  class="input-field" th:value="${sample.type}">

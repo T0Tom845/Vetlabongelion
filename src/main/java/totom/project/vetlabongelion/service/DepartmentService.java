@@ -2,6 +2,7 @@ package totom.project.vetlabongelion.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 import totom.project.vetlabongelion.model.Department;
 import totom.project.vetlabongelion.repository.DepartmentRepository;
@@ -9,10 +10,12 @@ import totom.project.vetlabongelion.repository.DepartmentRepository;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@Scope("prototype")
 public class DepartmentService {
-    @Autowired
-    DepartmentRepository departmentRepository;
+    final DepartmentRepository departmentRepository;
+    public DepartmentService(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
+    }
 
     public List<Department> findAll(){
         return departmentRepository.findAll();

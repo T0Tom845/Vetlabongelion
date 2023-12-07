@@ -28,7 +28,7 @@
         <div class="id" th:text="${employee.id}"></div>
         <input type="text" readonly="true" required name="name"  class="input-field" th:value="${employee.name}">
         <input type="text" readonly="true" required name="jobTitle" class="input-field" th:value="${employee.jobTitle}">
-        <input type="text" readonly="true" required name="depId" class="input-field" th:value="${employee.depId}">
+        <input type="text" readonly="true" required name="depId" class="input-field" th:value="${employee.getDepartmentName()}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
