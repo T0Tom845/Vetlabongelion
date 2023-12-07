@@ -10,7 +10,6 @@ import totom.project.vetlabongelion.repository.DepartmentRepository;
 import java.util.List;
 
 @Service
-@Scope("prototype")
 public class DepartmentService {
     final DepartmentRepository departmentRepository;
     public DepartmentService(DepartmentRepository departmentRepository) {
