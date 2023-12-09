@@ -26,9 +26,16 @@
 <th:block th:each="employee : ${employees}">
     <form class="table-row" th:id="'employee-form-' + ${employee.id}" th:action="@{/employees/editEmployee/{id}(id=${employee.id})}" method="post">
         <div class="id" th:text="${employee.id}"></div>
-        <input type="text" readonly="true" required name="name"  class="input-field" th:value="${employee.name}">
-        <input type="text" readonly="true" required name="jobTitle" class="input-field" th:value="${employee.jobTitle}">
-        <input type="text" readonly="true" required name="depId" class="input-field" th:value="${employee.getDepartmentName()}">
+        <input type="text" disabled required name="name"  class="input-field" th:value="${employee.name}">
+        <input type="text" disabled required name="jobTitle" class="input-field" th:value="${employee.jobTitle}">
+<!--        <input type="text" disabled required name="jobTitle" class="input-field" th:value="${employee.getDepartmentName()}">-->
+        <input type="text" hidden disabled required name="depId"  class="input-field empDepId" th:value="${employee.depId}">
+        <select class="input-field custom-select selector"  disabled >
+            <th:block  th:each="department : ${departments}" >
+                <option th:selected="${department.id == employee.depId}? 'true' : 'false'" th:value="${department.id}" th:text="${department.id} +': '+ ${department.name}"></option>
+            </th:block>
+        </select>
+
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
@@ -52,7 +59,7 @@
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');
         for (let data of dataArr) {
-            data.removeAttribute('readonly');
+            data.removeAttribute('disabled');
         }
 
         let submitButton = form.querySelector('.submit-button');
@@ -60,7 +67,21 @@
 
         let changeButton = form.querySelector('.change-button');
         changeButton.setAttribute('disabled', 'true');
+    }
 
+    selector = document.getElementsByClassName("selector");
+    for (const selectedSelector of selector) {
+        selectedSelector.addEventListener("change", () =>{
+            const selectedInSelector = selectedSelector.options[selectedSelector.selectedIndex];
+            let empDepId = selectedInSelector.parentElement.parentElement.querySelector(".empDepId");
+            console.log(empDepId);
+            console.log(empDepId.value);
+            empDepId.value = selectedInSelector.value;
+
+            if (!selectedSelector.options[selectedSelector.selectedIndex].selected){
+                selectedSelector.options[selectedSelector.selectedIndex].selected = true;
+            }
+        });
     }
 
 </script>

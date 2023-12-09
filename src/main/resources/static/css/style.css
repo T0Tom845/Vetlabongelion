@@ -94,8 +94,11 @@ form{
     box-shadow: 0px 0px 20px 10px #acf8a3;
     margin: 5px 10px;
 }
-.input-field[readonly]{
+.input-field:disabled{
     box-shadow: 0px 0px 20px 10px rgba(154, 154, 154, 0.6);
+}
+.input-field{
+
 }
 .submit-button:disabled, .change-button:disabled{
     display: none;

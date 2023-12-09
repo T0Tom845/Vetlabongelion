@@ -27,10 +27,13 @@ public class EmployeeController {
     @GetMapping(params = "!searchQuery")
     public String showEmployees(Model model) {
         List<Employee> employees;
+        List<Department> departments;
         employees = employeeService.findAll();
+        departments = departmentService.findAll();
         employees.forEach(employee -> employee.setDepartment(departmentService.findById(employee.getDepId())));
         Map<String, List<?>> attributesMap = new HashMap<>();
         attributesMap.put("employees", employees);
+        attributesMap.put("departments", departments);
         model.addAllAttributes(attributesMap);
         return "employees";
     }
@@ -64,6 +67,7 @@ public class EmployeeController {
 
     @PostMapping("editEmployee/{id}")
     public String editEmployee(@ModelAttribute("employee") Employee employee) {
+
         employeeService.update(employee);
         System.out.println("Post Edit " + employee.getId());
         return "redirect:/employees";
