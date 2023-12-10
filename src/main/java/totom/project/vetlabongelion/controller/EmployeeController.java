@@ -41,8 +41,15 @@ public class EmployeeController {
     @GetMapping(params = "searchQuery")
     public String showEmployeesBySearch(@RequestParam(value = "searchQuery") String searchQuery, Model model) {
         List<Employee> employees;
+        List<Department> departments;
         employees = employeeService.findAll(searchQuery);
-        model.addAttribute("employees", employees);
+        //TODO: Поиск по департаментам
+        departments = departmentService.findAll();
+        employees.forEach(employee -> employee.setDepartment(departmentService.findById(employee.getDepId())));
+        Map<String, List<?>> attributesMap = new HashMap<>();
+        attributesMap.put("employees", employees);
+        attributesMap.put("departments", departments);
+        model.addAllAttributes(attributesMap);
         return "employees";
     }
 
