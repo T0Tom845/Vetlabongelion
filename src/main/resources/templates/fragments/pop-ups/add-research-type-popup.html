@@ -5,9 +5,17 @@
     <label>Тип исследования:</label>
     <input type="text" name="type" required><br>
 
-    <label>ID отдела:</label>
-    <input type="text" name="departmentId" required><br>
+    <label>Отдел:</label>
+    <input type="text" name="departmentId" class="hidden-value-departmentId" hidden>
+    <select class="input-field custom-select selector no-shadow">
+      <th:block  th:each="department : ${departments}" >
+        <option th:value="${department.id}" th:text="${department.id} +': '+ ${department.name}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn red-btn" onclick="closeAddForm()">Закрыть</button>
+
   </form>
 </div>

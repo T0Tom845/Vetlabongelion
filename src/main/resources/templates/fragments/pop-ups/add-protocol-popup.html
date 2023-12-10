@@ -2,14 +2,27 @@
   <h1> Добавление работника </h1>
   <form th:action="@{/protocols}" method="post">
     <label>ID клиента:</label>
-    <input type="text" name="clientId" required><br>
-
+    <input type="text" name="clientId" class="hidden-value-client" hidden><br>
+    <select class="input-field custom-select selector-client no-shadow" >
+      <th:block th:each="client : ${clients}" >
+        <option th:value="${client.id}" th:text="${client.id} +': '+ ${client.name}"></option>
+      </th:block>
+    </select>
+    <br>
     <label>Дата оформления:</label>
     <input type="date" name="date" required><br>
 
-    <label>ID работника:</label>
-    <input type="text" name="employeeId" required><br>
+    <label>Работник:</label>
+    <input type="text" name="employeeId" class="hidden-value-employee" hidden><br>
+    <select class="input-field custom-select selector-employee no-shadow" >
+      <th:block  th:each="employee : ${employees}" >
+        <option th:value="${employee.id}" th:text="${employee.id} +': '+ ${employee.name}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn red-btn" onclick="closeAddForm()">Закрыть</button>
+
   </form>
 </div>

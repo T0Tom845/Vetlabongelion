@@ -1,18 +1,38 @@
 <div class="form-popup">
   <h1> Добавление исследования</h1>
   <form th:action="@{/researches}" method="post">
-    <label>ID типа исследования:</label>
-    <input type="text" name="typeId" required><br>
+    <label>Тип исследования:</label>
+    <input type="text" name="typeId" class="hidden-value-research-type" hidden>
+    <select class="input-field custom-select selector-research-type no-shadow">
+      <th:block th:each="researchType : ${researchTypes}" >
+        <option th:value="${researchType.id}" th:text="${researchType.id} +': '+ ${researchType.type}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <label>Id Протокола:</label>
-    <input type="text" name="protId" required><br>
+    <label>Протокол:</label>
+    <input type="text" name="protId" class="hidden-value-protocol" hidden>
+    <select class="input-field custom-select selector-protocol no-shadow">
+      <th:block  th:each="protocol : ${protocols}" >
+        <option th:value="${protocol.id}" th:text="${protocol.id}"></option>
+      </th:block>
+    </select>
+    <br>
 
     <label>Дата оформления:</label>
     <input type="date" name="date" required><br>
 
     <label>ID Заявки на исследование:</label>
-    <input type="text" name="requestId" required><br>
+    <input type="text" name="requestId" class="hidden-value-request" hidden>
+    <select class="input-field custom-select selector-protocol no-shadow">
+      <th:block  th:each="researchRequest : ${researchRequests}" >
+        <option th:value="${researchRequest.id}" th:text="${researchRequest.id}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn red-btn" onclick="closeAddForm()">Закрыть</button>
+
   </form>
 </div>

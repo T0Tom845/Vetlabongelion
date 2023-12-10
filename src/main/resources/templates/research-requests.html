@@ -59,6 +59,9 @@
     function openAddForm() {
         document.getElementById("add-research-request-form").style.display = "block";//TODO: Сделать единый id для попупа
     }
+    function closeAddForm() {
+        document.getElementById("add-research-request-form").style.display = "none";
+    }
     function enableEditForm(event){
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');

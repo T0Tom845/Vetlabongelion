@@ -52,6 +52,10 @@
     function openAddForm() {
         document.getElementById("add-protocol-form").style.display = "block";
     }
+    function closeAddForm() {
+        document.getElementById("add-protocol-form").style.display = "none";
+    }
+
     function enableEditForm(event){
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');

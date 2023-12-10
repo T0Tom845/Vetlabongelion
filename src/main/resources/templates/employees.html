@@ -10,7 +10,7 @@
 <div th:replace="~{fragments/general/header :: header}"></div>
 <div class="search-bar" th:insert="~{fragments/general/searchbar}"></div>
 <h1>Список работников</h1>
-<div class="add-entity"><a class="btn" onclick="openAddEmployeeForm()">Добавить пользователя</a></div>
+<div class="add-entity"><a class="btn" onclick="openAddForm()">Добавить пользователя</a></div>
 <div class="table-header">
     <h2>ID</h2>
     <h2>ФИО</h2>
@@ -45,8 +45,11 @@
 
 </body>
 <script type="text/javascript">
-    function openAddEmployeeForm() {
+    function openAddForm() {
         document.getElementById("add-employee-form").style.display = "block";
+    }
+    function closeAddForm() {
+        document.getElementById("add-employee-form").style.display = "none";
     }
     function enableEditForm(event){
         let form = event.target.closest('form');

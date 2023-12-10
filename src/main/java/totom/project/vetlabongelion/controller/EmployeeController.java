@@ -56,6 +56,9 @@ public class EmployeeController {
     @PostMapping
     public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.save(employee);
+        System.out.println(employee.getName());
+        System.out.println(employee.getJobTitle());
+        System.out.println(employee.getDepId());
         return "redirect:/employees";
     }
 

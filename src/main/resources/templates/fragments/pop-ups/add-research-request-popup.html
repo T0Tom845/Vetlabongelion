@@ -1,18 +1,38 @@
 <div class="form-popup">
-  <h1> Добавление исследования</h1>
+  <h1> Добавление заявки на исследование</h1>
   <form th:action="@{/research-requests}" method="post">
-    <label>ID работника:</label>
-    <input type="text" name="employeeId" required><br>
+    <label>Работник:</label>
+    <input type="text" name="employeeId" class="hidden-value-employee" hidden>
+    <select class="input-field custom-select selector-employee no-shadow" >
+      <th:block  th:each="employee : ${employees}" >
+        <option th:value="${employee.id}" th:text="${employee.id} +': '+ ${employee.name}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <label>ID клиента:</label>
-    <input type="text" name="clientId" required><br>
+    <label>Клиент:</label>
+    <input type="text" name="clientId" class="hidden-value-client" hidden>
+    <select class="input-field custom-select selector-client no-shadow">
+      <th:block  th:each="client : ${clients}" >
+        <option th:value="${client.id}" th:text="${client.id} +': '+ ${client.name}"></option>
+      </th:block>
+    </select>
+    <br>
 
     <label>Дата:</label>
     <input type="date" name="date" required><br>
 
-    <label>ID образца:</label>
-    <input type="text" name="sampleId" required><br>
+    <label>Образец:</label>
+    <input type="text" name="sampleId" class="hidden-value-sample" hidden>
+    <select class="input-field custom-select selector-sample no-shadow">
+      <th:block  th:each="sample : ${samples}" >
+        <option th:value="${sample.id}" th:text="${sample.id} +': '+ ${sample.name}"></option>
+      </th:block>
+    </select>
+    <br>
 
-    <button class="btn" onclick="closeForm()" type="submit">Сохранить</button>
+    <button class="btn" type="submit">Сохранить</button>
+    <button class="btn red-btn" onclick="closeAddForm()">Закрыть</button>
+
   </form>
 </div>
