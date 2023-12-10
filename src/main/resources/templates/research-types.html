@@ -14,13 +14,18 @@
 <div class="table-header">
     <h2>ID</h2>
     <h2>Тип ислледования</h2>
-    <h2>ID отдела</h2>
+    <h2>Отдел</h2>
 </div>
 <th:block th:each="researchType : ${researchTypes}">
     <form class="table-row" th:id="'research-type-form-' + ${researchType.id}" th:action="@{/research-types/editResearchType/{id}(id=${researchType.id})}" method="post">
         <div class="id" th:text="${researchType.id}"></div>
-        <input type="text" readonly="true" required name="type"  class="input-field" th:value="${researchType.type}">
-        <input type="text" readonly="true" required name="departmentId" class="input-field" th:value="${researchType.departmentId}">
+        <input type="text" disabled required name="type"  class="input-field" th:value="${researchType.type}">
+        <input type="text" hidden required name="departmentId" class="input-field hidden-value-departmentId" th:value="${researchType.departmentId}">
+        <select class="input-field custom-select selector"  disabled >
+            <th:block  th:each="department : ${departments}" >
+                <option th:selected="${department.id == researchType.departmentId}? 'true' : 'false'" th:value="${department.id}" th:text="${department.id} +': '+ ${department.name}"></option>
+            </th:block>
+        </select>
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
@@ -44,7 +49,7 @@
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');
         for (let data of dataArr) {
-            data.removeAttribute('readonly');
+            data.removeAttribute('disabled');
         }
 
         let submitButton = form.querySelector('.submit-button');
@@ -53,6 +58,21 @@
         let changeButton = form.querySelector('.change-button');
         changeButton.setAttribute('disabled', 'true');
 
+    }
+
+    selector = document.getElementsByClassName("selector");
+    for (const selectedSelector of selector) {
+        selectedSelector.addEventListener("change", () =>{
+            const selectedInSelector = selectedSelector.options[selectedSelector.selectedIndex];
+            let empDepId = selectedInSelector.parentElement.parentElement.querySelector(".hidden-value-departmentId");
+            console.log(empDepId);
+            console.log(empDepId.value);
+            empDepId.value = selectedInSelector.value;
+
+            if (!selectedSelector.options[selectedSelector.selectedIndex].selected){
+                selectedSelector.options[selectedSelector.selectedIndex].selected = true;
+            }
+        });
     }
 
 </script>

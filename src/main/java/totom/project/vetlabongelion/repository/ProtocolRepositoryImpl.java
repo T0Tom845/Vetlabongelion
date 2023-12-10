@@ -27,7 +27,7 @@ public class ProtocolRepositoryImpl implements ProtocolRepository {
                 "SELECT * from vet_protocol where prot_cli_id SIMILAR TO '%' || ? || '%' " +
                 "OR prot_date SIMILAR TO '%' || ? || '%' "+
                 "OR prot_emp_id SIMILAR TO '%' || ? || '%' " ;
-        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query));
+        return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER , query, query, query));//TODO: Как то надо починить поиск
     }
 
     @Override

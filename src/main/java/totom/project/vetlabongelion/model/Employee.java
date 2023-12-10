@@ -31,9 +31,5 @@ public class Employee {
         this.jobTitle = jobTitle;
         this.depId = depId;
     }
-    public String getDepartmentName(){
-        return department.getName();
-    }
-
 
 }

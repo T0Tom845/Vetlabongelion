@@ -13,7 +13,7 @@ public interface ResearchRepository {
             ,resultSet.getLong("res_type_id")
             ,resultSet.getLong("res_prot_id")
             ,resultSet.getDate("res_date")
-            ,resultSet.getLong("id_res_request"));
+            ,resultSet.getLong("res_request_id"));
 
     List<Research> findAll();
     Optional<Research> findById(Long id);

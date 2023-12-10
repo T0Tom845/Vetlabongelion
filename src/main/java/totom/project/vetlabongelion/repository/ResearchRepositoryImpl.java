@@ -29,7 +29,7 @@ public class ResearchRepositoryImpl implements ResearchRepository {
                 "SELECT * from vet_research where res_type_id SIMILAR TO '%' || ? || '%' " +
                         "OR res_prot_id SIMILAR TO '%' || ? || '%' " +
                         "OR res_date SIMILAR TO '%' || ? || '%' " +
-                        "OR id_res_request SIMILAR TO '%' || ? || '%' ";
+                        "OR res_request_id SIMILAR TO '%' || ? || '%' ";
         return new ArrayList<>(jdbcTemplate.query(sql, ROW_MAPPER, query, query, query, query));
     }
 
@@ -45,7 +45,7 @@ public class ResearchRepositoryImpl implements ResearchRepository {
 
     @Override
     public Research save(Research research) {
-        String sql = "INSERT INTO vet_research (res_type_id, res_prot_id, res_date, id_res_request) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO vet_research (res_type_id, res_prot_id, res_date, res_request_id) VALUES(?,?,?,?)";
         jdbcTemplate.update(sql,
                 research.getTypeId(),
                 research.getProtId(),
@@ -56,7 +56,7 @@ public class ResearchRepositoryImpl implements ResearchRepository {
 
     @Override
     public Research update(Research research) {
-        String sql = "UPDATE vet_research SET res_type_id = ?, res_prot_id = ?, res_date = ?, id_res_request = ? WHERE res_id = ?";
+        String sql = "UPDATE vet_research SET res_type_id = ?, res_prot_id = ?, res_date = ?, res_request_id = ? WHERE res_id = ?";
         jdbcTemplate.update(sql,
                 research.getTypeId(),
                 research.getProtId(),

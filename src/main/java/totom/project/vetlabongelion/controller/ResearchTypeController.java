@@ -4,28 +4,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import totom.project.vetlabongelion.model.Department;
+import totom.project.vetlabongelion.model.Employee;
 import totom.project.vetlabongelion.model.ResearchType;
+import totom.project.vetlabongelion.service.DepartmentService;
+import totom.project.vetlabongelion.service.EmployeeService;
 import totom.project.vetlabongelion.service.ResearchTypeService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/research-types")
 public class ResearchTypeController {
 
-    @Autowired
-    private ResearchTypeService researchTypeService;
+    private final ResearchTypeService researchTypeService;
+    private final DepartmentService departmentService;
+
+    public ResearchTypeController(ResearchTypeService researchTypeService, DepartmentService departmentService) {
+        this.researchTypeService = researchTypeService;
+        this.departmentService = departmentService;
+    }
 
     @GetMapping
     public String showResearchTypes(@RequestParam(value="searchQuery", required = false) String searchQuery, Model model) {
         List<ResearchType> researchTypes;
+        List<Department> departments;
         if (searchQuery == null){
             researchTypes = researchTypeService.findAll();
         }
         else {
             researchTypes = researchTypeService.findAll(searchQuery);
         }
-        model.addAttribute("researchTypes", researchTypes);
+        departments = departmentService.findAll();
+        Map<String, List<?>> attributesMap = new HashMap<>();
+        attributesMap.put("researchTypes", researchTypes);
+        attributesMap.put("departments", departments);
+        model.addAllAttributes(attributesMap);
         return "research-types";
     }
     @PostMapping

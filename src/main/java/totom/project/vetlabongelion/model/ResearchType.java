@@ -13,6 +13,7 @@ public class ResearchType {
     private Long id;
     private String type;
     private Long departmentId;
+    private Department department;
 
     public ResearchType(Long id, String type, Long departmentId){
         this.id = id;

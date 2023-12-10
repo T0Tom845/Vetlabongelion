@@ -13,7 +13,7 @@
 <div class="add-entity"><a class="btn" onclick="openAddForm()">Добавить исследование</a></div>
 <div class="table-header">
     <h2>ID</h2>
-    <h2>ID Типа исследования</h2>
+    <h2>Тип исследования</h2>
     <h2>ID Протокола</h2>
     <h2>Дата проведения</h2>
     <h2>ID заявки на исследование</h2>
@@ -21,10 +21,25 @@
 <th:block th:each="research : ${researches}">
     <form class="table-row" th:id="'research-form-' + ${research.id}" th:action="@{/researches/editResearch/{id}(id=${research.id})}" method="post">
         <div class="id" th:text="${research.id}"></div>
-        <input type="text" readonly="true" required name="typeId"  class="input-field" th:value="${research.typeId}">
-        <input type="text" readonly="true" required name="protId" class="input-field" th:value="${research.protId}">
-        <input type="date" readonly="true" required name="date" class="input-field" th:value="${research.date}">
-        <input type="text" readonly="true" required name="requestId" class="input-field" th:value="${research.requestId}">
+        <input type="text" hidden required name="typeId"  class="input-field hidden-value-research-type" th:value="${research.typeId}">
+        <select class="input-field custom-select selector-research-type"  disabled >
+            <th:block  th:each="researchType : ${researchTypes}" >
+                <option th:selected="${researchType.id == research.typeId}? 'true' : 'false'" th:value="${researchType.id}" th:text="${researchType.id} +': '+ ${researchType.type}"></option>
+            </th:block>
+        </select>
+        <input type="text" hidden required name="protId" class="input-field hidden-value-protocol" th:value="${research.protId}">
+        <select class="input-field custom-select selector-protocol"  disabled >
+            <th:block  th:each="protocol : ${protocols}" >
+                <option th:selected="${protocol.id == research.protId}? 'true' : 'false'" th:value="${protocol.id}" th:text="${protocol.id}"></option>
+            </th:block>
+        </select>
+        <input type="date" disabled required name="date" class="input-field" th:value="${research.date}">
+        <input type="text" hidden required name="requestId" class="input-field hidden-value-request" th:value="${research.requestId}">
+        <select class="input-field custom-select selector-protocol"  disabled >
+            <th:block  th:each="researchRequest : ${researchRequests}" >
+                <option th:selected="${researchRequest.id == research.requestId}? 'true' : 'false'" th:value="${researchRequest.id}" th:text="${researchRequest.id}"></option>
+            </th:block>
+        </select>
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
@@ -48,7 +63,7 @@
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');
         for (let data of dataArr) {
-            data.removeAttribute('readonly');
+            data.removeAttribute('disabled');
         }
 
         let submitButton = form.querySelector('.submit-button');
@@ -57,6 +72,49 @@
         let changeButton = form.querySelector('.change-button');
         changeButton.setAttribute('disabled', 'true');
 
+    }
+
+    selector = document.getElementsByClassName("selector-research-type");
+    for (const selectedSelector of selector) {
+        selectedSelector.addEventListener("change", () =>{
+            const selectedInSelector = selectedSelector.options[selectedSelector.selectedIndex];
+            let empDepId = selectedInSelector.parentElement.parentElement.querySelector(".hidden-value-research-type");
+            console.log(empDepId);
+            console.log(empDepId.value);
+            empDepId.value = selectedInSelector.value;
+
+            if (!selectedSelector.options[selectedSelector.selectedIndex].selected){
+                selectedSelector.options[selectedSelector.selectedIndex].selected = true;
+            }
+        });
+    }
+    selector = document.getElementsByClassName("selector-protocol");
+    for (const selectedSelector of selector) {
+        selectedSelector.addEventListener("change", () =>{
+            const selectedInSelector = selectedSelector.options[selectedSelector.selectedIndex];
+            let empDepId = selectedInSelector.parentElement.parentElement.querySelector(".hidden-value-protocol");
+            console.log(empDepId);
+            console.log(empDepId.value);
+            empDepId.value = selectedInSelector.value;
+
+            if (!selectedSelector.options[selectedSelector.selectedIndex].selected){
+                selectedSelector.options[selectedSelector.selectedIndex].selected = true;
+            }
+        });
+    }
+    selector = document.getElementsByClassName("selector-request");
+    for (const selectedSelector of selector) {
+        selectedSelector.addEventListener("change", () =>{
+            const selectedInSelector = selectedSelector.options[selectedSelector.selectedIndex];
+            let empDepId = selectedInSelector.parentElement.parentElement.querySelector(".hidden-value-request");
+            console.log(empDepId);
+            console.log(empDepId.value);
+            empDepId.value = selectedInSelector.value;
+
+            if (!selectedSelector.options[selectedSelector.selectedIndex].selected){
+                selectedSelector.options[selectedSelector.selectedIndex].selected = true;
+            }
+        });
     }
 
 </script>
