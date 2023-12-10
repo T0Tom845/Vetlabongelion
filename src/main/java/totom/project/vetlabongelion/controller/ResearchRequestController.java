@@ -4,29 +4,56 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import totom.project.vetlabongelion.model.Research;
-import totom.project.vetlabongelion.model.ResearchRequest;
+import totom.project.vetlabongelion.model.*;
+import totom.project.vetlabongelion.service.ClientService;
+import totom.project.vetlabongelion.service.EmployeeService;
 import totom.project.vetlabongelion.service.ResearchRequestService;
+import totom.project.vetlabongelion.service.SampleService;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/research-requests")
 public class ResearchRequestController {
 
-    @Autowired
-    private ResearchRequestService researchRequestService;
+    private final ResearchRequestService researchRequestService;
+    private final EmployeeService employeeService;
+    private final ClientService clientService;
+    private final SampleService sampleService;
+
+    public ResearchRequestController(ResearchRequestService researchRequestService,
+                                     EmployeeService employeeService,
+                                     ClientService clientService,
+                                     SampleService sampleService) {
+        this.researchRequestService = researchRequestService;
+        this.employeeService = employeeService;
+        this.clientService = clientService;
+        this.sampleService = sampleService;
+    }
 
     @GetMapping
     public String showResearchRequests(@RequestParam(value="searchQuery", required = false) String searchQuery, Model model) {
         List<ResearchRequest> researchRequests;
+        List<Employee> employees;
+        List<Client> clients;
+        List<Sample> samples;
         if (searchQuery == null){
             researchRequests = researchRequestService.findAll();
         }
         else {
             researchRequests = researchRequestService.findAll(searchQuery);
         }
-        model.addAttribute("researchRequests", researchRequests);
+        Map<String, List<?>> attributesMap = new HashMap<>();
+        employees = employeeService.findAll();
+        clients = clientService.findAll();
+        samples = sampleService.findAll();
+        attributesMap.put("researchRequests", researchRequests);
+        attributesMap.put("employees", employees);
+        attributesMap.put("clients", clients);
+        attributesMap.put("samples", samples);
+        model.addAllAttributes(attributesMap);
         return "research-requests";
     }
     @PostMapping

@@ -12,9 +12,12 @@ public class ResearchRequest {
     @Id
     private Long id;
     private Long employeeId;
-    private Long clientId;//TODO: Связать с таблицей client
+    private Employee employee;
+    private Long clientId;
+    private Client client;
     private Date date;
     private Long sampleId;
+    private Sample sample;
 
     public ResearchRequest(Long id, Long employeeId, Long clientId, Date date, Long sampleId) {
         this.id = id;

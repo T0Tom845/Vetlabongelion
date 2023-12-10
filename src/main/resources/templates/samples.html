@@ -20,9 +20,9 @@
 <th:block th:each="sample : ${samples}" >
     <form class="table-row" th:id="'sample-form-' + ${sample.id}" th:action="@{/samples/editSample/{id}(id=${sample.id})}" method="post">
         <div class="id" th:text="${sample.id}"></div>
-        <input type="text" readonly="true" required name="type"  class="input-field" th:value="${sample.type}">
-        <input type="text" readonly="true" required name="name" class="input-field" th:value="${sample.name}">
-        <input type="text" readonly="true" required name="amount" class="input-field" th:value="${sample.amount}">
+        <input type="text" disabled required name="type"  class="input-field" th:value="${sample.type}">
+        <input type="text" disabled required name="name" class="input-field" th:value="${sample.name}">
+        <input type="text" disabled required name="amount" class="input-field" th:value="${sample.amount}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
@@ -46,7 +46,7 @@
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');
         for (let data of dataArr) {
-            data.removeAttribute('readonly');
+            data.removeAttribute('disabled');
         }
 
         let submitButton = form.querySelector('.submit-button');
