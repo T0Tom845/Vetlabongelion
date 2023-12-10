@@ -30,7 +30,6 @@ public class Employee {
         this.name = name;
         this.jobTitle = jobTitle;
         this.depId = depId;
-        log.info("Employee has been setted");
     }
     public String getDepartmentName(){
         return department.getName();

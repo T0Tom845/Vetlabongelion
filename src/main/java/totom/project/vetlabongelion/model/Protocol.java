@@ -11,9 +11,11 @@ import java.util.Date;
 public class Protocol {
     @Id
     private Long id;
-    private Long clientId;  //TODO: связать prot_cli_id с таблицей client
+    private Long clientId;
     private Date date;
     private Long employeeId;
+    private Client client;
+    private Employee employee;
 
     public Protocol(Long id, Long clientId, Date date, Long employeeId){
         this.id = id;
