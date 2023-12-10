@@ -8,13 +8,7 @@
 </head>
 <body>
 <div th:insert="~{fragments/general/header :: header}"></div>
-<div class="search-bar">
-    <form method="get">
-        <label for="searchQuery" th:text="Поиск"></label>
-        <input type="text" name="searchQuery" id="searchQuery">
-        <button type="submit" class="btn">Поиск</button>
-    </form>
-</div>
+<div class="search-bar" th:insert="~{fragments/general/searchbar}"></div>
 <h1>Список исследований</h1>
 <div class="add-entity"><a class="btn" onclick="openAddForm()">Добавить исследование</a></div>
 <div class="table-header">

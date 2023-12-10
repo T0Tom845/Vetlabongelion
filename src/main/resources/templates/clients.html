@@ -8,13 +8,7 @@
 </head>
 <body>
 <div th:insert="~{fragments/general/header :: header}"></div>
-<div class="search-bar">
-    <form method="get">
-        <label for="searchQuery" th:text="Поиск"></label>
-        <input type="text" name="searchQuery" id="searchQuery">
-        <button type="submit" class="btn">Поиск</button>
-    </form>
-</div>
+<div class="search-bar" th:insert="~{fragments/general/searchbar}"></div>
 <h1>Список клиентов</h1>
 <div class="add-entity"><a class="btn" onclick="openAddClientForm()">Добавить пользователя</a></div>
 <div class="table-header">
@@ -26,8 +20,8 @@
 <th:block th:each="client : ${clients}">
     <form class="table-row" th:id="'client-form-' + ${client.id}" th:action="@{/clients/editClient/{id}(id=${client.id})}" method="post">
         <div class="id" th:text="${client.id}"></div>
-        <input type="text" readonly="true" required name="name"  class="input-field" th:value="${client.name}">
-        <input type="text" readonly="true" required name="company" class="input-field" th:value="${client.company}">
+        <input type="text" disabled required name="name"  class="input-field" th:value="${client.name}">
+        <input type="text" disabled required name="company" class="input-field" th:value="${client.company}">
         <div class="actions">
             <button type="button" class="btn change-button" onclick="enableEditForm(event)" th:text="Изменить"></button>
             <button type="submit" disabled class="btn submit-button" th:text="Сохранить"></button>
@@ -51,7 +45,7 @@
         let form = event.target.closest('form');
         let dataArr = form.getElementsByClassName('input-field');
         for (let data of dataArr) {
-            data.removeAttribute('readonly');
+            data.removeAttribute('disabled');
         }
 
         let submitButton = form.querySelector('.submit-button');
